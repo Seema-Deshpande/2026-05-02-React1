@@ -8,13 +8,24 @@ import Register from '../src/pages/Auth/Register';
 describe('Auth Components', () => {
   describe('Login Component', () => {
     it('renders the login form fields', () => {
-      //Todo: Render Login component and verify all form fields are present
-
+      render(<Login />);
+      expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
+      expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /login/i })).toBeInTheDocument();
     });
 
     it('logs email and password on submit', async () => {
-      //Todo: Spy on console.log, simulate user input and form submission, then verify the correct data is logged
+      const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
+      render(<Login />);
+      await userEvent.type(screen.getByLabelText(/email/i), 'jane@example.com');
+      await userEvent.type(screen.getByLabelText(/password/i), 'secret123');
+      await userEvent.click(screen.getByRole('button', { name: /login/i }));
+
+      expect(logSpy).toHaveBeenCalledWith('Email:', 'jane@example.com');
+      expect(logSpy).toHaveBeenCalledWith('Password:', 'secret123');
+
+      logSpy.mockRestore();
     });
   });
 
