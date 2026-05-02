@@ -15,7 +15,7 @@ The component should:
 ```
 Using the design of the login page in this screenshot, update our Login component to use a similar layout.
 
-For the image on the right, download and use any placeholder image from https://unsplash.com/ and place it in the `assets` folder. Adapt the layout to our existing CSS Modules approach.
+For the image on the right, download and use any placeholder image from https://unsplash.com/ and place it in the `assets` folder. Adapt the layout to our existing CSS approach.
 Do not clone the site's exact colors or typography — just use the layout structure as inspiration.
 ```
 

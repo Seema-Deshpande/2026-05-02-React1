@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import loginImg from "../../assets/login-bg.jpg";
 import "./Auth.css";
 
 function Login() {
@@ -15,28 +16,34 @@ function Login() {
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-box">
-        <h2>Login</h2>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            placeholder="Email"
-          />
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            placeholder="Password"
-          />
-          <button type="submit">Login</button>
-        </form>
+    <div className="login-container">
+      <div className="login-form-side">
+        <div className="login-form-inner">
+          <h1 className="login-brand">Login</h1>
+          <p className="login-tagline">Welcome back! Sign in to continue.</p>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="email" className="inline-placeholder">Email</label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              placeholder="Email address"
+            />
+            <label htmlFor="password" className="inline-placeholder">Password</label>
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              placeholder="Password"
+            />
+            <button type="submit" className="login-btn">Sign In</button>
+          </form>
+        </div>
+      </div>
+      <div className="login-image-side">
+        <img src={loginImg} alt="Login background" />
       </div>
     </div>
   );
