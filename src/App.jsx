@@ -8,11 +8,11 @@ function App() {
   
   return (
     <div className="app-layout">
-     { 
-      currentPage === 'register' ?
-      <Register /> :
-      <Login />
-     }
+      {
+        currentPage === 'register' ?
+          <Register /> :
+          <Login />
+      }
     </div>
   );
 }
