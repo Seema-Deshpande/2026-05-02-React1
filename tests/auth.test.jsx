@@ -11,21 +11,38 @@ describe('Auth Components', () => {
       render(<Login />);
       expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
       expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /login/i })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /sign in/i })).toBeInTheDocument();
+    });
+
+    it('reflects typed values in email and password inputs', async () => {
+      const user = userEvent.setup();
+      render(<Login />);
+
+      const emailInput = screen.getByLabelText(/email/i);
+      const passwordInput = screen.getByLabelText(/password/i);
+
+      await user.type(emailInput, 'jane@example.com');
+      await user.type(passwordInput, 'secret123');
+
+      expect(emailInput).toHaveValue('jane@example.com');
+      expect(passwordInput).toHaveValue('secret123');
     });
 
     it('logs email and password on submit', async () => {
       const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+      const alertSpy = vi.spyOn(window, 'alert').mockImplementation(() => {});
+      const user = userEvent.setup();
 
       render(<Login />);
-      await userEvent.type(screen.getByLabelText(/email/i), 'jane@example.com');
-      await userEvent.type(screen.getByLabelText(/password/i), 'secret123');
-      await userEvent.click(screen.getByRole('button', { name: /login/i }));
+      await user.type(screen.getByLabelText(/email/i), 'jane@example.com');
+      await user.type(screen.getByLabelText(/password/i), 'secret123');
+      await user.click(screen.getByRole('button', { name: /sign in/i }));
 
       expect(logSpy).toHaveBeenCalledWith('Email:', 'jane@example.com');
       expect(logSpy).toHaveBeenCalledWith('Password:', 'secret123');
 
       logSpy.mockRestore();
+      alertSpy.mockRestore();
     });
   });
 
